@@ -1,0 +1,23 @@
+.profile-page {
+    padding: 50px 40px;
+}
+
+.profile-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.profile-header h1 {
+    font-size: 36px;
+    color: #102a43;
+}
+
+.profile-header p {
+    margin-top: 8px;
+    color: #777;
+}
+
+.profile-content {
+    max-width: 900px;
+    margin: 0 auto;
+}

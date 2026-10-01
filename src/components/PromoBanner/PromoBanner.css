@@ -1,0 +1,33 @@
+.promo-banner {
+    margin: 30px 40px;
+    padding: 50px;
+    background-color: #062b5c;
+    color: white;
+    border-radius: 16px;
+    text-align: center;
+}
+
+.promo-content p:first-child {
+    font-size: 13px;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+}
+
+.promo-content h2 {
+    font-size: 36px;
+    margin-bottom: 12px;
+}
+
+.promo-content p {
+    margin-bottom: 20px;
+}
+
+.promo-content button {
+    border: none;
+    background-color: white;
+    color: #062b5c;
+    padding: 12px 24px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}

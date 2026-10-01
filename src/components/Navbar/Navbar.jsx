@@ -1,0 +1,28 @@
+import "./Navbar.css";
+
+function Navbar() {
+    return (
+        <nav className="navbar">
+
+            <div className="logo">
+                ShopSphere
+            </div>
+
+            <div className="nav-links">
+                <a href="#">Home</a>
+                <a href="#">Shop</a>
+                <a href="#">Categories</a>
+                <a href="#">Cart</a>
+            </div>
+
+            <div className="nav-icons">
+                <span>🔍</span>
+                <span>👤</span>
+                <span>🛒</span>
+            </div>
+
+        </nav>
+    );
+}
+
+export default Navbar;

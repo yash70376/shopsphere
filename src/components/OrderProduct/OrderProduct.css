@@ -1,0 +1,43 @@
+.order-product {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 20px 0;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.order-product-image {
+    width: 90px;
+    height: 90px;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #f3f4f6;
+    flex-shrink: 0;
+}
+
+.order-product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.order-product-info {
+    flex: 1;
+}
+
+.order-product-info h3 {
+    font-size: 16px;
+    color: #111827;
+    margin-bottom: 8px;
+}
+
+.order-product-info p {
+    font-size: 13px;
+    color: #777;
+}
+
+.order-product-price {
+    font-size: 16px;
+    font-weight: bold;
+    color: #111827;
+}

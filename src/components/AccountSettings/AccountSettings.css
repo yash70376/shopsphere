@@ -1,0 +1,50 @@
+.account-settings {
+    margin-top: 25px;
+    padding: 30px;
+    background-color: white;
+    border: 1px solid #eeeeee;
+    border-radius: 12px;
+}
+
+.account-settings > h2 {
+    font-size: 22px;
+    color: #102a43;
+    margin-bottom: 25px;
+}
+
+.setting-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.setting-item:last-child {
+    border-bottom: none;
+}
+
+.setting-item h3 {
+    font-size: 16px;
+    color: #111827;
+    margin-bottom: 6px;
+}
+
+.setting-item p {
+    font-size: 13px;
+    color: #777;
+}
+
+.setting-item button {
+    padding: 9px 16px;
+    border: 1px solid #062b5c;
+    border-radius: 7px;
+    background-color: white;
+    color: #062b5c;
+    cursor: pointer;
+}
+
+.setting-item button:hover {
+    background-color: #062b5c;
+    color: white;
+}

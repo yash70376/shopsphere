@@ -1,0 +1,18 @@
+.products-page {
+    padding: 50px 40px;
+}
+
+.products-page-header {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.products-page-header h1 {
+    font-size: 36px;
+    color: #102a43;
+}
+
+.products-page-header p {
+    margin-top: 8px;
+    color: #777;
+}
