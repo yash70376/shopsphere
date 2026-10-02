@@ -1,11 +1,10 @@
 import "./App.css";
 
-import Signup from "./pages/Signup/Signup";
+import EmailVerification from "./pages/EmailVerification/EmailVerification";
 
 function App() {
-
     return (
-        <Signup />
+        <EmailVerification />
     );
 }
 
