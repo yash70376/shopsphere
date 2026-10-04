@@ -17,7 +17,7 @@ function ProductDetails() {
         originalPrice: 249.99,
         rating: 4.8,
         reviews: 142,
-        stock: 12,
+        stock: 4,
         image:
             "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800",
         description:
@@ -113,14 +113,10 @@ function ProductDetails() {
 
                     <div className="details-rating">
                         ⭐ {product.rating}
-
-                        <span>
-                            {product.reviews} Reviews
-                        </span>
+                        <span>{product.reviews} Reviews</span>
                     </div>
 
                     <div className="details-price">
-
                         <span className="current-price">
                             ${product.price}
                         </span>
@@ -128,64 +124,90 @@ function ProductDetails() {
                         <span className="old-price">
                             ${product.originalPrice}
                         </span>
-
                     </div>
 
                     <p className="details-description">
                         {product.description}
                     </p>
 
-                    <p className="details-stock">
-                        Stock:
-                        <strong>
-                            {product.stock} available
-                        </strong>
-                    </p>
+                    {product.stock > 0 ? (
 
-                    <div className="details-quantity">
+                        <>
+                            <p className="details-stock">
+                                Stock:
+                                <strong>
+                                    {product.stock} available
+                                </strong>
+                            </p>
 
-                        <span>Quantity</span>
+                            {/* && : low stock warning */}
+                            {product.stock < 5 && (
+                                <p className="low-stock-warning">
+                                    Only {product.stock} left!
+                                </p>
+                            )}
 
-                        <div className="quantity-box">
+                            <div className="details-quantity">
 
-                            <button onClick={decreaseQuantity}>
-                                −
+                                <span>Quantity</span>
+
+                                <div className="quantity-box">
+
+                                    <button onClick={decreaseQuantity}>
+                                        −
+                                    </button>
+
+                                    <span>{quantity}</span>
+
+                                    <button onClick={increaseQuantity}>
+                                        +
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+                            <button
+                                onClick={function() {
+                                    setIsFavorite(function(previousFavorite) {
+                                        return !previousFavorite;
+                                    });
+                                }}
+                            >
+                                {isFavorite
+                                    ? "❤️ Remove Favorite"
+                                    : "♡ Add to Favorite"}
                             </button>
 
-                            <span>
-                                {quantity}
-                            </span>
-
-                            <button onClick={increaseQuantity}>
-                                +
+                            <button
+                                className="add-cart-button"
+                                onClick={handleAddToCart}
+                            >
+                                Add to Cart
                             </button>
 
-                        </div>
+                            {/* && : cart success message */}
+                            {cartMessage && (
+                                <p className="cart-message">
+                                    {cartMessage}
+                                </p>
+                            )}
 
-                    </div>
+                        </>
 
-                    <button
-                        onClick={function() {
-                            setIsFavorite(function(previousFavorite) {
-                                return !previousFavorite;
-                            });
-                        }}
-                    >
-                        {isFavorite
-                            ? "❤️ Remove Favorite"
-                            : "♡ Add to Favorite"}
-                    </button>
+                    ) : (
 
-                    <button
-                        className="add-cart-button"
-                        onClick={handleAddToCart}
-                    >
-                        Add to Cart
-                    </button>
+                        <>
+                            <p className="out-of-stock">
+                                Out of Stock
+                            </p>
 
-                    <p>
-                        {cartMessage}
-                    </p>
+                            <button disabled>
+                                Out of Stock
+                            </button>
+                        </>
+
+                    )}
 
                 </div>
 
@@ -195,7 +217,10 @@ function ProductDetails() {
 
                 <div className="related-header">
                     <h2>Related Products</h2>
-                    <p>You may also like these products</p>
+
+                    <p>
+                        You may also like these products
+                    </p>
                 </div>
 
                 <div className="related-grid">
