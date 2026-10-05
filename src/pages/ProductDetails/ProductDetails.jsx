@@ -17,7 +17,7 @@ function ProductDetails() {
         originalPrice: 249.99,
         rating: 4.8,
         reviews: 142,
-        stock: 4,
+        stock: 0,
         image:
             "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800",
         description:

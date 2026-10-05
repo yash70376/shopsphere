@@ -1,39 +1,121 @@
+import { useState } from "react";
 import "./Login.css";
 
 function Login() {
 
+    // NEW FUNCTIONALITY: Email ko React state se control karna
+    const [email, setEmail] = useState("");
+
+    // NEW FUNCTIONALITY: Password ko React state se control karna
+    const [password, setPassword] = useState("");
+
+    // NEW FUNCTIONALITY: Form validation errors store karna
+    const [errors, setErrors] = useState({});
+
+    // NEW FUNCTIONALITY: Email input ko state ke saath connect karna
+    function handleEmailChange(event) {
+        setEmail(event.target.value);
+    }
+
+    // NEW FUNCTIONALITY: Password input ko state ke saath connect karna
+    function handlePasswordChange(event) {
+        setPassword(event.target.value);
+    }
+
+    // NEW FUNCTIONALITY: Form validation
+    function validateForm() {
+
+        let newErrors = {};
+
+        if (email.trim() === "") {
+            newErrors.email = "Email is required";
+        }
+
+        if (password.trim() === "") {
+            newErrors.password = "Password is required";
+        }
+
+        if (email !== "" && !email.includes("@")) {
+            newErrors.email = "Enter a valid email";
+        }
+
+        if (password !== "" && password.length < 6) {
+            newErrors.password =
+                "Password must be at least 6 characters";
+        }
+
+        return newErrors;
+    }
+
+    // NEW FUNCTIONALITY: Login form submit handle karna
+    function handleSubmit(event) {
+
+        event.preventDefault();
+
+        const validationErrors = validateForm();
+
+        setErrors(validationErrors);
+
+        if (Object.keys(validationErrors).length === 0) {
+            console.log("Login data:");
+            console.log("Email:", email);
+            console.log("Password:", password);
+        }
+    }
+
     return (
         <main className="login-page">
 
-            <div className="login-card">
+            <div className="login-container">
 
-                <div className="login-header">
-                    <h1>Welcome Back</h1>
-                    <p>Login to your ShopSphere account</p>
-                </div>
+                <h1>Login</h1>
 
-                <form className="login-form">
+                <p>Welcome back to ShopSphere</p>
+
+                <form onSubmit={handleSubmit}>
 
                     <div className="form-group">
-                        <label>Email</label>
+
+                        <label htmlFor="email">
+                            Email
+                        </label>
 
                         <input
+                            id="email"
                             type="email"
                             placeholder="Enter your email"
+                            value={email}
+                            onChange={handleEmailChange}
                         />
+
+                        {errors.email && (
+                            <p className="form-error">
+                                {errors.email}
+                            </p>
+                        )}
+
                     </div>
 
                     <div className="form-group">
-                        <label>Password</label>
+
+                        <label htmlFor="password">
+                            Password
+                        </label>
 
                         <input
+                            id="password"
                             type="password"
                             placeholder="Enter your password"
+                            value={password}
+                            onChange={handlePasswordChange}
                         />
-                    </div>
 
-                    <div className="forgot-password">
-                        <a href="#">Forgot Password?</a>
+                        {errors.password && (
+                            <p className="form-error">
+                                {errors.password}
+                            </p>
+                        )}
+
                     </div>
 
                     <button type="submit">
@@ -41,13 +123,6 @@ function Login() {
                     </button>
 
                 </form>
-
-                <div className="signup-link">
-                    <p>
-                        Don't have an account?
-                        <a href="#"> Signup</a>
-                    </p>
-                </div>
 
             </div>
 

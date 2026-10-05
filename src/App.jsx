@@ -1,10 +1,10 @@
 import "./App.css";
 
-import ProductDetails from "./pages/ProductDetails/ProductDetails";
+import Products from "./pages/Products/Products";
 
 function App() {
     return (
-        <ProductDetails />
+        <Products/>
     );
 }
 
