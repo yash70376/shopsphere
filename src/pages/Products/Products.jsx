@@ -3,8 +3,11 @@ import { useEffect, useState } from "react";
 import "./Products.css";
 
 import SearchBar from "../../components/SearchBar/SearchBar";
+
 import ProductFilters from "../../components/ProductFilters/ProductFilters";
+
 import ProductGrid from "../../components/ProductGrid/ProductGrid";
+
 import Pagination from "../../components/Pagination/Pagination";
 
 function Products() {
@@ -32,11 +35,13 @@ function Products() {
                     name: "SonicPro Wireless Headphones",
                     price: 199.99
                 },
+
                 {
                     id: "p2",
                     name: "Aura Smartwatch Series 5",
                     price: 149.50
                 },
+
                 {
                     id: "p3",
                     name: "Minimalist Leather Sneakers",
@@ -60,28 +65,56 @@ function Products() {
 
     // NEW FUNCTIONALITY: Loading UI
     if (loading) {
+
         return (
             <main className="products-page">
+
                 <h1>Loading products...</h1>
+
             </main>
         );
     }
 
     // NEW FUNCTIONALITY: Error UI
     if (error) {
+
         return (
             <main className="products-page">
+
                 <h1>{error}</h1>
+
+            </main>
+        );
+    }
+
+    // NEW FUNCTIONALITY: Empty State
+    if (products.length === 0) {
+
+        return (
+            <main className="products-page">
+
+                <h1>No products found</h1>
+
+                <p>
+                    There are currently no products available.
+                </p>
+
             </main>
         );
     }
 
     return (
+
         <main className="products-page">
 
             <div className="products-page-header">
+
                 <h1>Our Products</h1>
-                <p>Explore our complete collection</p>
+
+                <p>
+                    Explore our complete collection
+                </p>
+
             </div>
 
             <SearchBar />
@@ -89,6 +122,7 @@ function Products() {
             <ProductFilters />
 
             {/* NEW FUNCTIONALITY: Loaded products ko ProductGrid ko dena */}
+
             <ProductGrid products={products} />
 
             <Pagination />
