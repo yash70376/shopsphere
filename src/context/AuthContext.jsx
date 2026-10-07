@@ -1,8 +1,10 @@
-import { createContext } from "react";
+import { createContext, useState } from "react";
 
 const AuthContext = createContext();
 
 function AuthProvider({ children }) {
+
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     const user = {
         name: "Yash",
@@ -10,7 +12,12 @@ function AuthProvider({ children }) {
     };
 
     return (
-        <AuthContext.Provider value={user}>
+        <AuthContext.Provider
+            value={{
+                user,
+                isLoggedIn
+            }}
+        >
             {children}
         </AuthContext.Provider>
     );

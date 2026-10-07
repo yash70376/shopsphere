@@ -1,6 +1,13 @@
+import { useContext } from "react";
+
 import "./Navbar.css";
 
+import AuthContext from "../../context/AuthContext";
+
 function Navbar() {
+
+    const user = useContext(AuthContext);
+
     return (
         <nav className="navbar">
 
@@ -17,7 +24,9 @@ function Navbar() {
 
             <div className="nav-icons">
                 <span>🔍</span>
-                <span>👤</span>
+                <span>
+                    👤 {user.name}
+                </span>
                 <span>🛒</span>
             </div>
 

@@ -1,11 +1,12 @@
 import "./App.css";
 
-import Products from "./pages/Products/Products";
+import Navbar from "./components/Navbar/Navbar";
 
 function App() {
     return (
-        <Products/>
+        <Navbar/>
     );
 }
+
 
 export default App;
