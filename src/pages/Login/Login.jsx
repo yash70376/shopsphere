@@ -1,5 +1,8 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+
 import "./Login.css";
+
+import AuthContext from "../../context/AuthContext";
 
 function Login() {
 
@@ -11,6 +14,9 @@ function Login() {
 
     // NEW FUNCTIONALITY: Form validation errors store karna
     const [errors, setErrors] = useState({});
+
+    // NEW FUNCTIONALITY: AuthContext se login function lena
+    const { login } = useContext(AuthContext);
 
     // NEW FUNCTIONALITY: Email input ko state ke saath connect karna
     function handleEmailChange(event) {
@@ -57,6 +63,10 @@ function Login() {
         setErrors(validationErrors);
 
         if (Object.keys(validationErrors).length === 0) {
+
+            // NEW FUNCTIONALITY: Valid form ke baad user ko login karna
+            login();
+
             console.log("Login data:");
             console.log("Email:", email);
             console.log("Password:", password);

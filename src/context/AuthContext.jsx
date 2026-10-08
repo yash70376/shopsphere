@@ -4,6 +4,7 @@ const AuthContext = createContext();
 
 function AuthProvider({ children }) {
 
+    // NEW FUNCTIONALITY: Login state ko change karna
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     const user = {
@@ -11,11 +12,23 @@ function AuthProvider({ children }) {
         email: "yash@example.com"
     };
 
+    // NEW FUNCTIONALITY: User ko login karna
+    function login() {
+        setIsLoggedIn(true);
+    }
+
+    // NEW FUNCTIONALITY: User ko logout karna
+    function logout() {
+        setIsLoggedIn(false);
+    }
+
     return (
         <AuthContext.Provider
             value={{
                 user,
-                isLoggedIn
+                isLoggedIn,
+                login,
+                logout
             }}
         >
             {children}

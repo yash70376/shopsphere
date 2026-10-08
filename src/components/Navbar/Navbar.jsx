@@ -6,7 +6,8 @@ import AuthContext from "../../context/AuthContext";
 
 function Navbar() {
 
-    const user = useContext(AuthContext);
+    // NEW FUNCTIONALITY: Context se authentication data lena
+    const { user, isLoggedIn, login, logout } = useContext(AuthContext);
 
     return (
         <nav className="navbar">
@@ -24,9 +25,24 @@ function Navbar() {
 
             <div className="nav-icons">
                 <span>🔍</span>
-                <span>
-                    👤 {user.name}
-                </span>
+
+                {/* NEW FUNCTIONALITY: Login status ke according UI */}
+                {isLoggedIn ? (
+                    <>
+                        <span>
+                            👤 {user.name}
+                        </span>
+
+                        <button onClick={logout}>
+                            Logout
+                        </button>
+                    </>
+                ) : (
+                    <button onClick={login}>
+                        Login
+                    </button>
+                )}
+
                 <span>🛒</span>
             </div>
 
