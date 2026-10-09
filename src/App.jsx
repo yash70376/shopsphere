@@ -1,12 +1,11 @@
-import Navbar from "./components/Navbar/Navbar";
-import Login from "./pages/Login/Login";
+import Products from "./pages/Products/Products";
 
 function App() {
 
     return (
         <>
-            <Navbar />
-            <Login />
+            <Products />
+            
         </>
     );
 }
