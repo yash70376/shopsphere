@@ -1,15 +1,15 @@
+
 import { useEffect, useRef, useState } from "react";
 import "./SearchBar.css";
 
 function SearchBar() {
-
     const [search, setSearch] = useState("");
 
-    // NEW FUNCTIONALITY: Search input ka reference banana
+    // NEW FUNCTIONALITY: Input ko directly access karna
     const searchInputRef = useRef(null);
 
-    // NEW FUNCTIONALITY: Input ko automatically focus karna
-    useEffect(function() {
+    // Existing functionality: Component load hone par focus
+    useEffect(function () {
         searchInputRef.current.focus();
     }, []);
 
@@ -22,11 +22,14 @@ function SearchBar() {
         console.log("Searching for:", search);
     }
 
+    // NEW FUNCTIONALITY: Search clear karke input par focus karna
+    function handleClear() {
+        setSearch("");
+        searchInputRef.current.focus();
+    }
+
     return (
-        <form
-            className="search-bar"
-            onSubmit={handleSubmit}
-        >
+        <form className="search-bar" onSubmit={handleSubmit}>
             <input
                 ref={searchInputRef}
                 type="text"
@@ -37,6 +40,10 @@ function SearchBar() {
 
             <button type="submit">
                 Search
+            </button>
+
+            <button type="button" onClick={handleClear}>
+                Clear Search
             </button>
         </form>
     );
