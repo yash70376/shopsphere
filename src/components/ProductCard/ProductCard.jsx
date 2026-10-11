@@ -1,4 +1,5 @@
 function ProductCard({ product }) {
+    
     return (
         <div className="product-card">
 
@@ -10,6 +11,7 @@ function ProductCard({ product }) {
             </div>
 
             <div className="product-info">
+                
 
                 <p className="product-category">
                     {product.category}

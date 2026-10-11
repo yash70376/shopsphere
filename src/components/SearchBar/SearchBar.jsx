@@ -1,15 +1,14 @@
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import "./SearchBar.css";
 
-function SearchBar() {
-    const [search, setSearch] = useState("");
-
-    // NEW FUNCTIONALITY: Input ko directly access karna
+// NEW FUNCTIONALITY: Parent se search state aur setter receive karna
+function SearchBar({ search, setSearch }) {
+    // Existing functionality: Input ko directly access karna
     const searchInputRef = useRef(null);
 
-    // Existing functionality: Component load hone par focus
-    useEffect(function () {
+    // Existing functionality: Component load hone par input focus karna
+    useEffect(function() {
         searchInputRef.current.focus();
     }, []);
 
@@ -22,7 +21,7 @@ function SearchBar() {
         console.log("Searching for:", search);
     }
 
-    // NEW FUNCTIONALITY: Search clear karke input par focus karna
+    // Existing functionality: Search clear karke input par focus karna
     function handleClear() {
         setSearch("");
         searchInputRef.current.focus();
