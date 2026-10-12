@@ -1,5 +1,5 @@
 
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
 import "./Products.css";
 
@@ -13,7 +13,7 @@ function Products() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
 
-    // NEW FUNCTIONALITY: Search text ko parent component mein store karna
+    // Existing functionality: Search state
     const [search, setSearch] = useState("");
 
     useEffect(function() {
@@ -70,7 +70,12 @@ function Products() {
         };
     }, []);
 
-    // NEW FUNCTIONALITY: Search ke according products filter karna
+    // NEW FUNCTIONALITY: Product select callback
+    const handleProductSelect = useCallback(function(product) {
+        console.log("Selected product:", product.name);
+    }, []);
+
+    // Existing functionality: Search products
     const filteredProducts = useMemo(function() {
         return products.filter(function(product) {
             return product.name
@@ -107,7 +112,7 @@ function Products() {
         );
     }
 
-    // NEW FUNCTIONALITY: Search match na milne par message
+    // Existing functionality: No search matches
     if (filteredProducts.length === 0) {
         return (
             <main className="products-page">
@@ -116,7 +121,10 @@ function Products() {
                     <p>Explore our complete collection</p>
                 </div>
 
-                <SearchBar search={search} setSearch={setSearch} />
+                <SearchBar
+                    search={search}
+                    setSearch={setSearch}
+                />
 
                 <h2>No matching products found</h2>
                 <p>Try searching with a different product name.</p>
@@ -131,13 +139,18 @@ function Products() {
                 <p>Explore our complete collection</p>
             </div>
 
-            {/* NEW FUNCTIONALITY: Search state ko SearchBar se connect karna */}
-            <SearchBar search={search} setSearch={setSearch} />
+            <SearchBar
+                search={search}
+                setSearch={setSearch}
+            />
 
             <ProductFilters />
 
-            {/* NEW FUNCTIONALITY: Filtered products ProductGrid ko dena */}
-            <ProductGrid products={filteredProducts} />
+            {/* NEW FUNCTIONALITY: Callback ProductGrid ko dena */}
+            <ProductGrid
+                products={filteredProducts}
+                onProductSelect={handleProductSelect}
+            />
 
             <Pagination />
         </main>

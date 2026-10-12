@@ -1,8 +1,7 @@
-function ProductCard({ product }) {
-    
+
+function ProductCard({ product, onProductSelect }) {
     return (
         <div className="product-card">
-
             <div className="product-image">
                 <img
                     src={product.image}
@@ -11,8 +10,6 @@ function ProductCard({ product }) {
             </div>
 
             <div className="product-info">
-                
-
                 <p className="product-category">
                     {product.category}
                 </p>
@@ -24,7 +21,6 @@ function ProductCard({ product }) {
                 </p>
 
                 <div className="product-bottom">
-
                     <div>
                         <span className="product-price">
                             ${product.price}
@@ -35,14 +31,12 @@ function ProductCard({ product }) {
                         </span>
                     </div>
 
-                    <button>
+                    {/* NEW FUNCTIONALITY: Click par parent callback call karna */}
+                    <button onClick={() => onProductSelect(product)}>
                         Add
                     </button>
-
                 </div>
-
             </div>
-
         </div>
     );
 }
