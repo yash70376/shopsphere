@@ -1,17 +1,19 @@
+
 import { useContext } from "react";
 
 import "./Navbar.css";
-
 import AuthContext from "../../context/AuthContext";
+import { useCart } from "../../context/CartContext";
 
 function Navbar() {
-
-    // NEW FUNCTIONALITY: Context se authentication data lena
+    // Existing functionality: Authentication data
     const { user, isLoggedIn, login, logout } = useContext(AuthContext);
+
+    // NEW FUNCTIONALITY: Shared cart count read karna
+    const { cartCount } = useCart();
 
     return (
         <nav className="navbar">
-
             <div className="logo">
                 ShopSphere
             </div>
@@ -26,26 +28,19 @@ function Navbar() {
             <div className="nav-icons">
                 <span>🔍</span>
 
-                {/* NEW FUNCTIONALITY: Login status ke according UI */}
+                {/* Existing functionality: Login status ke according UI */}
                 {isLoggedIn ? (
                     <>
-                        <span>
-                            👤 {user.name}
-                        </span>
-
-                        <button onClick={logout}>
-                            Logout
-                        </button>
+                        <span>👤 {user.name}</span>
+                        <button onClick={logout}>Logout</button>
                     </>
                 ) : (
-                    <button onClick={login}>
-                        Login
-                    </button>
+                    <button onClick={login}>Login</button>
                 )}
 
-                <span>🛒</span>
+                {/* NEW FUNCTIONALITY: Shared cart count dikhana */}
+                <span>🛒 Cart ({cartCount})</span>
             </div>
-
         </nav>
     );
 }

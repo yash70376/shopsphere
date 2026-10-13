@@ -8,6 +8,9 @@ import ProductFilters from "../../components/ProductFilters/ProductFilters";
 import ProductGrid from "../../components/ProductGrid/ProductGrid";
 import Pagination from "../../components/Pagination/Pagination";
 
+// NEW FUNCTIONALITY: Shared cart access karna
+import { useCart } from "../../context/CartContext";
+
 function Products() {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -15,6 +18,9 @@ function Products() {
 
     // Existing functionality: Search state
     const [search, setSearch] = useState("");
+
+    // NEW FUNCTIONALITY: Shared cart ka addToCart function lena
+    const { addToCart } = useCart();
 
     useEffect(function() {
         console.log("Products page loaded");
@@ -70,10 +76,11 @@ function Products() {
         };
     }, []);
 
-    // NEW FUNCTIONALITY: Product select callback
+    // NEW FUNCTIONALITY: Product ko shared cart mein add karna
     const handleProductSelect = useCallback(function(product) {
+        addToCart(product, 1);
         console.log("Selected product:", product.name);
-    }, []);
+    }, [addToCart]);
 
     // Existing functionality: Search products
     const filteredProducts = useMemo(function() {
@@ -146,7 +153,7 @@ function Products() {
 
             <ProductFilters />
 
-            {/* NEW FUNCTIONALITY: Callback ProductGrid ko dena */}
+            {/* NEW FUNCTIONALITY: ProductGrid ko cart callback dena */}
             <ProductGrid
                 products={filteredProducts}
                 onProductSelect={handleProductSelect}

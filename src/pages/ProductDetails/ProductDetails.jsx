@@ -1,13 +1,19 @@
+
 import { useState } from "react";
 import "./ProductDetails.css";
 
 import ProductCard from "../../components/ProductCard/ProductCard";
 
-function ProductDetails() {
+// NEW FUNCTIONALITY: Shared cart access karna
+import { useCart } from "../../context/CartContext";
 
+function ProductDetails() {
     const [quantity, setQuantity] = useState(1);
     const [isFavorite, setIsFavorite] = useState(false);
     const [cartMessage, setCartMessage] = useState("");
+
+    // NEW FUNCTIONALITY: Shared cart ka addToCart function lena
+    const { addToCart } = useCart();
 
     let product = {
         id: "p1",
@@ -18,10 +24,8 @@ function ProductDetails() {
         rating: 4.8,
         reviews: 142,
         stock: 10,
-        image:
-            "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800",
-        description:
-            "Experience immersive active noise cancellation with ultra-soft memory foam earcups."
+        image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800",
+        description: "Experience immersive active noise cancellation with ultra-soft memory foam earcups."
     };
 
     let relatedProducts = [
@@ -31,10 +35,8 @@ function ProductDetails() {
             category: "Accessories",
             price: 149.50,
             originalPrice: 179.99,
-            image:
-                "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600",
-            description:
-                "Track health metrics, heart rate, sleep quality, and GPS workouts."
+            image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600",
+            description: "Track health metrics, heart rate, sleep quality, and GPS workouts."
         },
         {
             id: "p3",
@@ -42,10 +44,8 @@ function ProductDetails() {
             category: "Fashion",
             price: 89.99,
             originalPrice: 110.00,
-            image:
-                "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600",
-            description:
-                "Premium leather sneakers with ergonomic cushioned soles."
+            image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600",
+            description: "Premium leather sneakers with ergonomic cushioned soles."
         },
         {
             id: "p4",
@@ -53,10 +53,8 @@ function ProductDetails() {
             category: "Home",
             price: 59.99,
             originalPrice: 75.00,
-            image:
-                "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=600",
-            description:
-                "Sleek architectural LED desk lamp with adjustable color temperature."
+            image: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=600",
+            description: "Sleek architectural LED desk lamp with adjustable color temperature."
         },
         {
             id: "p5",
@@ -64,14 +62,14 @@ function ProductDetails() {
             category: "Electronics",
             price: 429.99,
             originalPrice: 499.99,
-            image:
-                "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=600",
-            description:
-                "Ultra-wide curved monitor designed for immersive gaming and productivity."
+            image: "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=600",
+            description: "Ultra-wide curved monitor designed for immersive gaming and productivity."
         }
     ];
 
+    // NEW FUNCTIONALITY: Selected quantity ke saath cart mein product add karna
     function handleAddToCart() {
+        addToCart(product, quantity);
         setCartMessage("Product added to cart!");
     }
 
@@ -93,9 +91,7 @@ function ProductDetails() {
 
     return (
         <main className="product-details-page">
-
             <section className="product-details">
-
                 <div className="product-details-image">
                     <img
                         src={product.image}
@@ -104,7 +100,6 @@ function ProductDetails() {
                 </div>
 
                 <div className="product-details-info">
-
                     <p className="details-category">
                         {product.category}
                     </p>
@@ -131,7 +126,6 @@ function ProductDetails() {
                     </p>
 
                     {product.stock > 0 ? (
-
                         <>
                             <p className="details-stock">
                                 Stock:
@@ -140,7 +134,7 @@ function ProductDetails() {
                                 </strong>
                             </p>
 
-                            {/* && : low stock warning */}
+                            {/* Existing functionality: Low stock warning */}
                             {product.stock < 5 && (
                                 <p className="low-stock-warning">
                                     Only {product.stock} left!
@@ -148,11 +142,9 @@ function ProductDetails() {
                             )}
 
                             <div className="details-quantity">
-
                                 <span>Quantity</span>
 
                                 <div className="quantity-box">
-
                                     <button onClick={decreaseQuantity}>
                                         −
                                     </button>
@@ -162,9 +154,7 @@ function ProductDetails() {
                                     <button onClick={increaseQuantity}>
                                         +
                                     </button>
-
                                 </div>
-
                             </div>
 
                             <button
@@ -186,17 +176,14 @@ function ProductDetails() {
                                 Add to Cart
                             </button>
 
-                            {/* && : cart success message */}
+                            {/* Existing functionality: Cart success message */}
                             {cartMessage && (
                                 <p className="cart-message">
                                     {cartMessage}
                                 </p>
                             )}
-
                         </>
-
                     ) : (
-
                         <>
                             <p className="out-of-stock">
                                 Out of Stock
@@ -206,15 +193,11 @@ function ProductDetails() {
                                 Out of Stock
                             </button>
                         </>
-
                     )}
-
                 </div>
-
             </section>
 
             <section className="related-products">
-
                 <div className="related-header">
                     <h2>Related Products</h2>
 
@@ -224,20 +207,20 @@ function ProductDetails() {
                 </div>
 
                 <div className="related-grid">
-
                     {relatedProducts.map(function(product) {
                         return (
                             <ProductCard
                                 key={product.id}
                                 product={product}
+                                // NEW FUNCTIONALITY: Related product ko shared cart mein add karna
+                                onProductSelect={function(selectedProduct) {
+                                    addToCart(selectedProduct, 1);
+                                }}
                             />
                         );
                     })}
-
                 </div>
-
             </section>
-
         </main>
     );
 }

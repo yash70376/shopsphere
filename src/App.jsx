@@ -1,18 +1,15 @@
+
 import Products from "./pages/Products/Products";
-import Cart from "./pages/Cart/Cart";
-import ProductDetails from "./pages/ProductDetails/ProductDetails";
 import Navbar from "./components/Navbar/Navbar";
+import { CartProvider } from "./context/CartContext";
 
 function App() {
-
     return (
-        <>
-            <Navbar/>
+        // NEW FUNCTIONALITY: Shared cart state ko app mein provide karna
+        <CartProvider>
+            <Navbar />
             <Products />
-            <Cart/>
-             <ProductDetails/>
-            
-        </>
+        </CartProvider>
     );
 }
 
