@@ -1,6 +1,7 @@
 
 import Products from "./pages/Products/Products";
 import Navbar from "./components/Navbar/Navbar";
+import Cart from "./pages/Cart/Cart";
 import { CartProvider } from "./context/CartContext";
 
 function App() {
@@ -9,6 +10,7 @@ function App() {
         <CartProvider>
             <Navbar />
             <Products />
+            <Cart />
         </CartProvider>
     );
 }
