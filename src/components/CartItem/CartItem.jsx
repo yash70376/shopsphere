@@ -1,6 +1,12 @@
+
 import "./CartItem.css";
+import { useCart } from "../../context/CartContext";
 
 function CartItem({ item }) {
+
+    // NEW FUNCTIONALITY: Shared cart se remove function lena
+    const { removeFromCart } = useCart();
+
     return (
         <div className="cart-item">
 
@@ -31,7 +37,13 @@ function CartItem({ item }) {
                         <button>+</button>
                     </div>
 
-                    <button className="remove-button">
+                    {/* NEW FUNCTIONALITY: Product ko cart se remove karna */}
+                    <button
+                        className="remove-button"
+                        onClick={function() {
+                            removeFromCart(item.id);
+                        }}
+                    >
                         Remove
                     </button>
 
