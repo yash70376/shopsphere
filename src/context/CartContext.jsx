@@ -3,11 +3,11 @@ import { createContext, useContext, useState } from "react";
 
 const CartContext = createContext();
 
-// NEW FUNCTIONALITY: Shared cart state provide karna
+// Shared cart state provide karna
 function CartProvider({ children }) {
     const [cartItems, setCartItems] = useState([]);
 
-    // NEW FUNCTIONALITY: Cart mein product add ya quantity update karna
+    // Cart mein product add ya quantity update karna
     function addToCart(product, quantity = 1) {
         setCartItems(function(previousItems) {
             const existingItem = previousItems.find(function(item) {
@@ -34,7 +34,7 @@ function CartProvider({ children }) {
         });
     }
 
-    // NEW FUNCTIONALITY: Cart se product remove karna
+    // Cart se product remove karna
     function removeFromCart(productId) {
         setCartItems(function(previousItems) {
             return previousItems.filter(function(item) {
@@ -43,7 +43,27 @@ function CartProvider({ children }) {
         });
     }
 
-    // NEW FUNCTIONALITY: Cart mein total units count karna
+    // NEW: Product ki quantity update karna
+    function updateCartQuantity(productId, newQuantity) {
+        if (newQuantity < 1) {
+            return;
+        }
+
+        setCartItems(function(previousItems) {
+            return previousItems.map(function(item) {
+                if (item.id === productId) {
+                    return {
+                        ...item,
+                        quantity: newQuantity
+                    };
+                }
+
+                return item;
+            });
+        });
+    }
+
+    // Cart mein total units count karna
     const cartCount = cartItems.reduce(function(total, item) {
         return total + item.quantity;
     }, 0);
@@ -54,7 +74,8 @@ function CartProvider({ children }) {
                 cartItems,
                 cartCount,
                 addToCart,
-                removeFromCart
+                removeFromCart,
+                updateCartQuantity
             }}
         >
             {children}
@@ -62,7 +83,7 @@ function CartProvider({ children }) {
     );
 }
 
-// NEW FUNCTIONALITY: Components ko shared cart access dena
+// Components ko shared cart access dena
 function useCart() {
     return useContext(CartContext);
 }
